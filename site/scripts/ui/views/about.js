@@ -15,7 +15,6 @@ ui._about = (function(){
     }
 
     function onViewOpened(data){
-        console.log("yyoyoyoyoyoy", data.Version);
         view.find("#siaversion").text(data.Version);
     }
 
