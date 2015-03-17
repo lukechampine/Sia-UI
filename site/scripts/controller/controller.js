@@ -2,9 +2,13 @@ var controller = (function() {
 
     var data = {};
     var createdAddressList = [];
+    var dataListeners = {};
     var uiConfig;
 
     function init() {
+        $.get("http://www.siacoin.com/betamessage.txt", function(content){
+            ui.notify(content);
+        });
         system.getUIConfig(function(config) {
             uiConfig = config;
 
@@ -130,8 +134,6 @@ var controller = (function() {
             httpApiCall("/renter/upload", {
                 "source": filePath,
                 "nickname": nickName,
-            }, function(){
-                ui.notify("File upload complete!", "success");
             });
         });
         ui.addListener("announce-host", function(){
@@ -200,6 +202,7 @@ var controller = (function() {
             };
             updateUI();
             if (callback) callback();
+            triggerListener("wallet");
         });
     }
 
@@ -227,6 +230,7 @@ var controller = (function() {
             lastUpdateTime = Date.now();
             updateUI();
             if (callback) callback();
+            triggerListener("miner");
         });
     }
 
@@ -237,6 +241,7 @@ var controller = (function() {
             };
             updateUI();
             if (callback) callback();
+            triggerListener("host");
         }).error(function() {
             console.log(arguments);
         });
@@ -249,6 +254,7 @@ var controller = (function() {
             };
             updateUI();
             if (callback) callback();
+            triggerListener("file");
         }).error(function() {
             console.log(arguments);
         });
@@ -263,6 +269,7 @@ var controller = (function() {
             };
             updateUI();
             if (callback) callback();
+            triggerListener("consensus");
         }).error(function() {
             console.log(arguments);
         });
@@ -273,6 +280,19 @@ var controller = (function() {
             data.peer = response;
             updateUI();
             if (callback) callback();
+            triggerListener("peer");
+        }).error(function() {
+            console.log(arguments);
+        });
+    }
+
+    function updateQueue(callback){
+        data.downloadqueue = data.downloadqueue || [];
+        $.getJSON(uiConfig.siad_addr + "/renter/downloadqueue", function(response) {
+            data.downloadqueue = response;
+            updateUI();
+            if (callback) callback();
+            triggerListener("downloadqueue");
         }).error(function() {
             console.log(arguments);
         });
@@ -285,6 +305,7 @@ var controller = (function() {
         updateFile();
         updateConsensus();
         updatePeer();
+        updateQueue();
     }
 
     function updateUI() {
@@ -293,9 +314,23 @@ var controller = (function() {
         }
     }
 
+    function triggerListener(type){
+        if (dataListeners[type]){
+            dataListeners[type] = dataListeners[type].filter(function(callback){
+                return !callback(data);
+            });
+        }
+    }
+
+    function addDataListener(type, callback){
+        dataListeners[type] = dataListeners[type] || [];
+        dataListeners[type].push(callback);
+    }
+
     return {
         "init": init,
         "update": update,
+        "addDataListener": addDataListener,
         "promptUserIfUpdateAvailable": promptUserIfUpdateAvailable
     };
 })();
