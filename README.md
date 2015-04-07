@@ -5,7 +5,7 @@
 This is the user interface for [Sia](https://github.com/NebulousLabs/Sia), it is a desktop application based off the
 [atom-shell](https://github.com/atom/atom-shell) framework.
 
-## Prerequesits
+## Prerequisites
 
 - [siad](https://github.com/NebulousLabs/Sia)
 
