@@ -22,13 +22,13 @@ var util = (function(){
     }
     function fsiacoin(mcoin, l){
         if (!l) l = 10;
-        var string = siacoin(mcoin).toFixed(l);
+        var string = parseFloat(siacoin(mcoin).toFixed(l));
 
-        // Indicate if the user has some value
-        if (mcoin > 0 && string == (0).toFixed(l)){
-            string = (0).toFixed(l).substring(0,l-1) + "1";
+        // Indicate if the user has some value with a last digit of '1'
+        if (mcoin > 0 && string == parseFloat((0).toFixed(l))){
+            string = parseFloat((0).toFixed(l).substring(0,l-1) + "1");
         }
-        return siacoin(mcoin) + "SC";
+        return string + " SC";
     }
 
     function USDConvert(balance){

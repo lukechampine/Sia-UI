@@ -73,7 +73,7 @@ ui._transferFunds = ui["_transfer-funds"] = (function(){
             for (var i = 0;i < data.wallet.Accounts.length;i++){
                 console.log(data.wallet.Accounts[i], accountName);
                 if (data.wallet.Accounts[i].Name == accountName){
-                    accountBalance = data.wallet.Accounts[i].Balance;
+                    accountBalance = util.siacoin(data.wallet.Accounts[i].Balance);
                 }
             }
 

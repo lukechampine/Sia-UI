@@ -50,6 +50,6 @@ Within the `site` directory there are several important folders and files...
 
 ### Organization of application windows/tabs
 
-Each tab of the application (i.e. money, mining, hosting etc.) has it's own markup, script and stylesheet.
+Each tab of the application (i.e. wallet, mining, hosting etc.) has it's own markup, script and stylesheet.
 
-For example, the money/wallet tab has a script in `scripts/ui/views/money.js`, markup in `markup/pages/money.haml` and stylesheet in `stylesheets/money.less`. All the application windows/tabs are organized in this manner, so it should be relatively easy to make edits to any individual view.
+For example, the wallet tab has a script in `scripts/ui/views/manage-account.js`, markup in `markup/pages/manage-account.haml` and stylesheet in `stylesheets/manage-account.less`. All the application windows/tabs are organized in this manner, so it should be relatively easy to make edits to any individual view.

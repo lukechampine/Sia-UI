@@ -27,11 +27,11 @@ ui._hosting = (function(){
         },{
             "name": "Price",
             "unit": "SC",
-            "conversion": 1/util.siaConversionFactor
+            "conversion": 1
         },{
             "name": "Collateral",
             "unit": "SC",
-            "conversion": 1/util.siaConversionFactor
+            "conversion": 1
         }
     ];
 
