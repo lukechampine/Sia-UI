@@ -85,11 +85,13 @@ function loadConfig() {
     }
     var config = JSON.parse(fs.readFileSync(configPath));
 
+    // TODO: Prettify Error Window
     var daemonPath = path.join(__dirname, "Sia", config.siad_cmd);
     if (!fs.existsSync(daemonPath)) {
-        console.log(daemonPath);
         daemonPath = showErrorWindow("Siad not found!");
-        console.log(daemonPath);
+        delete config.siad_cmd;
+        config.siad_cmd = daemonPath;
+        fs.writeFileSync(configPath, JSON.stringify(config));
     }
 
     return config;
