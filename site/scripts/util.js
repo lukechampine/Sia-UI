@@ -20,6 +20,9 @@ var util = (function(){
     function siacoin(mcoin){
         return mcoin / siaConversionFactor;
     }
+    function baseUnit(units){
+        return units * siaConversionFactor;
+    }
     function fsiacoin(mcoin, l){
         if (!l) l = 10;
         var string = parseFloat(siacoin(mcoin).toFixed(l));
@@ -45,6 +48,7 @@ var util = (function(){
         "siaConversionFactor": siaConversionFactor,
         "limitPrecision": limitPrecision,
         "siacoin": siacoin,
+        "baseUnit": baseUnit,
         "fsiacoin": fsiacoin
     };
 })();

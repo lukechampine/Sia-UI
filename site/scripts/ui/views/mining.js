@@ -66,7 +66,7 @@ ui._mining = (function(){
         }
 
         eActiveMinerCount.text(data.miner.RunningThreads);
-        eIncomeRate.html(util.fsiacoin(data.miner.IncomeRate, 20) + "/s");
+        //eIncomeRate.html(util.fsiacoin(data.miner.IncomeRate, 20) + "/s"); RELEASE HOTFIX 5.6.15
 
         eAccountName.text(data.miner.AccountName);
 

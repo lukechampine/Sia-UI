@@ -2,8 +2,8 @@
 
 ## Environment Setup
 
-1. Download the [latest release of Sia](https://sia-builder.cyrozap.com/job/sia/lastSuccessfulBuild/)
-2. Clone Sia-UI: `git clone https://github.com/NebulousLabs/Sia-UI.git`
+1. Clone Sia-UI: `git clone https://github.com/NebulousLabs/Sia-UI.git`
+2. Download the [latest release of Sia](https://sia-builder.cyrozap.com/job/sia/lastSuccessfulBuild/) into a folder of Sia-UI such that the siad executable is at Sia-UI/Sia/siad
 3. Install npm
    - Ubuntu: `sudo apt-get install npm`
    - Mac OS X: `brew install node`
