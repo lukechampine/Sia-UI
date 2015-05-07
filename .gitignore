@@ -1,6 +1,6 @@
 *.html
-sia.wallet
 *.css
 node_modules
 atom-shell
-info.log
+Sia
+config.json
