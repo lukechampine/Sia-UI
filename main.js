@@ -101,6 +101,6 @@ function loadConfig() {
 function setupIPCHandlers() {
     ipc.on("save-file-dialog", function(event){
         var downloadPath = dialog.showSaveDialog();
-        event.returnValue = downloadPath;
+        event.returnValue = downloadPath ? downloadPath : null;
     });
 }
