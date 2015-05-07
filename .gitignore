@@ -1,5 +1,6 @@
 *.html
 *.css
+*.swp
 node_modules
 atom-shell
 Sia
