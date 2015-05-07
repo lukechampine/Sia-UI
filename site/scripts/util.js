@@ -48,6 +48,7 @@ var util = (function(){
         "siaConversionFactor": siaConversionFactor,
         "limitPrecision": limitPrecision,
         "siacoin": siacoin,
+        "baseUnit": baseUnit,
         "fsiacoin": fsiacoin
     };
 })();
