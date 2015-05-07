@@ -44,7 +44,7 @@ function startMainWindow() {
 
     mainWindow.loadUrl('file://' + __dirname + '/site/index.html');
 
-    mainWindow.openDevTools();
+    //mainWindow.openDevTools();
 
     mainWindow.on('closed', function() {
         mainWindow = null;
@@ -101,6 +101,6 @@ function loadConfig() {
 function setupIPCHandlers() {
     ipc.on("save-file-dialog", function(event){
         var downloadPath = dialog.showSaveDialog();
-        event.returnValue = downloadPath;
+        event.returnValue = downloadPath ? downloadPath : null;
     });
 }

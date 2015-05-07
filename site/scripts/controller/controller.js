@@ -123,6 +123,9 @@ var controller = (function() {
         });
         ui.addListener("download-file", function(fileNickname) {
             var savePath = ipc.sendSync("save-file-dialog");
+            if (!savePath) {
+                return
+            }
             ui.notify("Downloading " + fileNickname + " to "+savePath+" folder", "download");
             httpApiCall("/renter/download", {
                 "nickname": fileNickname,
