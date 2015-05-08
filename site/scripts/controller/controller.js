@@ -148,7 +148,7 @@ var controller = (function() {
             ui.notify("Updating Network...", "peers");
 
             function addPeer(peerAddr) {
-                httpApiCall("/peer/add", {
+                httpApiCall("/gateway/peers/add", {
                     "address": peerAddr
                 }, function() {
                     ui.notifySmall("Successfully added peer: " + peerAddr, "success");
@@ -158,7 +158,7 @@ var controller = (function() {
             }
 
             function removePeer(peerAddr) {
-                httpApiCall("/peer/remove", {
+                httpApiCall("/gateway/peers/remove", {
                     "address": peerAddr
                 }, function() {
                     ui.notifySmall("Successfully removed peer: " + peerAddr, "success");
@@ -166,6 +166,7 @@ var controller = (function() {
                     ui.notifySmall("Error removing peer: " + peerAddr, "error");
                 });
             }
+
             var oldPeers = data.peer.Peers;
             for (var i = 0; i < oldPeers.length; i++) {
                 if (peers.indexOf(oldPeers[i]) == -1) {
