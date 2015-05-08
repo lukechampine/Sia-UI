@@ -31,6 +31,7 @@ ui._network = (function(){
         eItemBlueprint.parent().append(eItem);
         eItem.find(".cancel").click(function(){
             eItem.remove();
+            eItems = eItems.not(eItem);
         });
         eItem.find(".value").change(function(){
             applyChanges();

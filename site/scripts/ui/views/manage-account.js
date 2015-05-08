@@ -1,8 +1,8 @@
 ui._manageAccount = ui["_manage-account"] = (function(){
 
     var view,eBackToMoney, eBalance, eAccountName, eAddFunds, eWithdraw,
-        eAddressBlueprint,eAddresses,eTransactionBlueprint, eTransactions, eCreateAddress,
-        eSendMoney, eTransferFunds, eDeleteAccount, eAddressDropdown, eTransactionDropdown;
+        eAddressBlueprint,eAddresses, eCreateAddress, eSendMoney,
+        eTransferFunds, eDeleteAccount, eAddressDropdown;
 
     var accountName;
 
@@ -21,10 +21,7 @@ ui._manageAccount = ui["_manage-account"] = (function(){
         eAddFunds = view.find(".add-funds");
         eWithdraw = view.find(".withdraw");
         eAddressDropdown = view.find(".dropdown-button");
-        eTransactionDropdown = view.find(".transaction-button");
         eAddresses = $();
-        eTransactionBlueprint = view.find(".transactions .item.blueprint");
-        eTransactions = $();
 
         addEvents();
     }
@@ -55,9 +52,6 @@ ui._manageAccount = ui["_manage-account"] = (function(){
             ui._tooltip(this, "Not Implemented");
         });
         eAddressDropdown.click(function(){
-            ui._tooltip(this, "Not Implemented");
-        });
-        eTransactionDropdown.click(function(){
             ui._tooltip(this, "Not Implemented");
         });
     }
@@ -106,26 +100,6 @@ ui._manageAccount = ui["_manage-account"] = (function(){
             eItems.push(item[0]);
         }
         eAddresses = $(eItems);
-
-        // Populate transactions
-        eTransactions.remove();
-        eTransactions = $();
-        eItems = [];
-        for (var i = 0;i < account.Transactions.length;i++){
-            var item = eTransactionBlueprint.clone().removeClass("blueprint");
-            eTransactionBlueprint.parent().append(item);
-            item.find(".date").text(account.Transactions[i].Date);
-            item.find(".amt").text(account.Transactions[i].Amount);
-            var icon = item.find(".icon i");
-            icon.removeClass("fa-arrow-right").removeClass("fa-arrow-left");
-            if (account.Transactions[i].Deposit){
-                icon.addClass("fa-arrow-right");
-            }else{
-                icon.addClass("fa-arrow-left");
-            }
-            eItems.push(item[0]);
-        }
-        eTransactions = $(eItems);
     }
 
     return {
