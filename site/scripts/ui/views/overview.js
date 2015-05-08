@@ -22,7 +22,7 @@ ui._overview = (function(){
     function update(data){
         // Second Header
         eBalance.html(util.fsiacoin(data.wallet.Balance));
-        eBlockHeight.html(data.consensus.Height + " Blocks Mined");
+        eBlockHeight.html("Block Height: " + data.consensus.Height);
     }
 
     return {
