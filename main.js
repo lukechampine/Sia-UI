@@ -8,6 +8,7 @@ var shell = require('shell');
 var path = require('path');
 
 var mainWindow = null;
+var popupWindow = null;
 
 // Quit when all windows are closed.
 // TODO: Allow daemon to run in background
@@ -105,4 +106,28 @@ function setupIPCHandlers() {
         var downloadPath = dialog.showSaveDialog();
         event.returnValue = downloadPath ? downloadPath : null;
     });
+    ipc.on("share-file", function(event, asciiText){
+        popupWindow = new BrowserWindow({
+            "width": 640,
+            "height": 480,
+            "min-width": 640,
+            "min-height": 480,
+            "title": "Ascii Code"
+        });
+
+        popupWindow.loadUrl('file://' + __dirname + '/lib/popups/asciicode.html');
+
+        popupWindow.on('closed', function() {
+            popupWindow = null;
+        });
+
+        popupWindow.webContents.on('did-finish-load', function() {
+            popupWindow.webContents.send('ascii', asciiText);
+        });
+    });
+    ipc.on("close-popup", function(event){
+        console.log("clse-popup");
+        popupWindow.close();
+        // popupWindow = null;
+    })
 }

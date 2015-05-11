@@ -181,6 +181,14 @@ var controller = (function() {
                 }
             });
         });
+        ui.addListener("share-file", function(fileNickname){
+            // Make a request to get the ascii share string
+            httpApiCall("/renter/files/shareascii", {
+                "nickname": fileNickname
+            }, function(response){
+                ipc.send("share-file", response["File"]);
+            });
+        });
     }
 
     var lastUpdateTime = Date.now();

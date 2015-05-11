@@ -99,8 +99,11 @@ ui._files = (function(){
                 }
                 eFileBlueprint.parent().append(eFile);
                 newFileElements.push(eFile[0]);
-                eFile.click(function(){
+                eFile.find(".download").click(function(){
                     ui._trigger("download-file", fileNickname);
+                });
+                eFile.find(".share").click(function(){
+                    ui._trigger("share-file", fileNickname);
                 });
             }
         });
