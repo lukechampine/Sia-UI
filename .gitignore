@@ -5,12 +5,3 @@ node_modules
 atom-shell
 Sia
 config.json
-consensus
-gateway
-host
-hostdir
-info.log
-renter
-sia.wallet
-sia.wallet.backup
-wallet
