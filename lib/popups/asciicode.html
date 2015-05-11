@@ -29,19 +29,28 @@
 
         button:hover{
             opacity:.5;
+            cursor:pointer;
         }
 
         </style>
 
         <script>
             var ipc = require('ipc');
-            ipc.on("ascii", function(ascii){
+            var clipboard = require("clipboard");
+            var ascii;
+            ipc.on("ascii", function(_ascii){
+                ascii = _ascii;
                 document.getElementById("ta").value = ascii;
             });
+            function copyToClipboard(){
+                clipboard.writeText(ascii);
+                document.getElementById("copyToClipboard").innerHTML = "Copied!";
+            }
         </script>
     </head>
     <body>
         <textarea id='ta'>Loading...</textarea>
         <button onclick="ipc.send('close-popup');">Okay</button>
+        <button id='copyToClipboard' onclick="copyToClipboard();">Copy to Clipboard</button>
     </body>
 </html>
