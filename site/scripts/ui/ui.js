@@ -14,13 +14,15 @@
 var ui = (function(){
 
     var currentView = "overview";
-    var viewNames = ["overview", "money", "manage-account", "transfer-funds", "upload-file", "files", "mining", "hosting", "network","about"];
+    var viewNames = ["overview", "money", "manage-account", "transfer-funds", "upload-file", "files", "mining", "hosting", "network","about", "add-ascii"];
     var transitionTypes = {
         "money->manage-account": "slideleft",
         "manage-account->money": "slideright",
         "manage-account->transfer-funds": "slideleft",
         "transfer-funds->manage-account": "slideright",
         "files->upload-file": "slideleft",
+        "files->add-ascii": "slideleft",
+        "add-ascii->files": "slideright",
         "upload-file->files": "slideright"
     };
     var eTooltip;

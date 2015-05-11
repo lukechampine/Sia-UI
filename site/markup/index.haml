@@ -32,6 +32,7 @@
         %script{:type => "text/javascript",:src => "scripts/ui/views/upload-file.js"}
         %script{:type => "text/javascript",:src => "scripts/ui/views/network.js"}
         %script{:type => "text/javascript",:src => "scripts/ui/views/about.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/views/add-ascii.js"}
         :javascript
             $(window).ready(function(){
                 ui.init();
@@ -55,4 +56,5 @@
                     +include "markup/pages/upload-file.haml"
                     +include "markup/pages/network.haml"
                     +include "markup/pages/about.haml"
+                    +include "markup/pages/add-ascii.haml"
         +include "markup/hovering.haml"

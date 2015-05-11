@@ -1,6 +1,6 @@
 ui._files = (function(){
 
-    var view, eUploadFile, eFileBlueprint, eFiles, eSearch, eSearchBox;
+    var view, eUploadFile, eFileBlueprint, eFiles, eSearch, eSearchBox, eAddAscii;
 
     function init(){
         view = $("#files");
@@ -8,6 +8,7 @@ ui._files = (function(){
         eFileBlueprint = view.find(".file.blueprint");
         eSearchBox = view.find(".search");
         eSearch = view.find(".search .text");
+        eAddAscii = view.find(".add-ascii");
         eFiles = $();
 
         addEvents();
@@ -27,6 +28,9 @@ ui._files = (function(){
         eSearchBox.click(function(e){
             eSearch.focus();
             updateFileList(lastLoadedFiles);
+        });
+        eAddAscii.click(function(e){
+            ui.switchView("add-ascii");
         });
     }
 
