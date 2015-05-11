@@ -181,6 +181,21 @@ var controller = (function() {
                 }
             });
         });
+        ui.addListener("share-file", function(fileNickname){
+            // Make a request to get the ascii share string
+            httpApiCall("/renter/files/shareascii", {
+                "nickname": fileNickname
+            }, function(response){
+                ipc.send("share-file", response["File"]);
+            });
+        });
+        ui.addListener("add-ascii-file", function(asciiText){
+            httpApiCall("/renter/files/loadascii", {
+                "file": asciiText
+            }, function(response){
+                console.log(response);
+            });
+        });
     }
 
     var lastUpdateTime = Date.now();

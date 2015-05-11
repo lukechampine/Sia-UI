@@ -1,6 +1,6 @@
 ui._files = (function(){
 
-    var view, eUploadFile, eFileBlueprint, eFiles, eSearch, eSearchBox;
+    var view, eUploadFile, eFileBlueprint, eFiles, eSearch, eSearchBox, eAddAscii;
 
     function init(){
         view = $("#files");
@@ -8,6 +8,7 @@ ui._files = (function(){
         eFileBlueprint = view.find(".file.blueprint");
         eSearchBox = view.find(".search");
         eSearch = view.find(".search .text");
+        eAddAscii = view.find(".add-ascii");
         eFiles = $();
 
         addEvents();
@@ -27,6 +28,9 @@ ui._files = (function(){
         eSearchBox.click(function(e){
             eSearch.focus();
             updateFileList(lastLoadedFiles);
+        });
+        eAddAscii.click(function(e){
+            ui.switchView("add-ascii");
         });
     }
 
@@ -99,8 +103,11 @@ ui._files = (function(){
                 }
                 eFileBlueprint.parent().append(eFile);
                 newFileElements.push(eFile[0]);
-                eFile.click(function(){
+                eFile.find(".download").click(function(){
                     ui._trigger("download-file", fileNickname);
+                });
+                eFile.find(".share").click(function(){
+                    ui._trigger("share-file", fileNickname);
                 });
             }
         });
