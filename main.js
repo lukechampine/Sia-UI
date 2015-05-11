@@ -126,8 +126,6 @@ function setupIPCHandlers() {
         });
     });
     ipc.on("close-popup", function(event){
-        console.log("clse-popup");
         popupWindow.close();
-        // popupWindow = null;
     })
 }
