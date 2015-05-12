@@ -196,6 +196,14 @@ var controller = (function() {
                 console.log(response);
             });
         });
+        ui.addListener("delete-file", function(fileNickname){
+            // Make the request to delete the file.
+            httpApiCall("/renter/files/delete", {
+                "nickname": fileNickname
+            }, function(response){
+                console.log(response);
+            });
+        });
     }
 
     var lastUpdateTime = Date.now();

@@ -109,6 +109,9 @@ ui._files = (function(){
                 eFile.find(".share").click(function(){
                     ui._trigger("share-file", fileNickname);
                 });
+                eFile.find(".delete").click(function(){
+                    ui._trigger("delete-file", fileNickname);
+                });
             }
         });
         eFiles = $(newFileElements);
