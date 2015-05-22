@@ -23,7 +23,9 @@ ui._uploadFile = ui["_upload-file"] = (function(){
                 add: function(e, data){
                     eFileName.text(data.files[0].name);
                     var filePath = data.files[0].path;
+                    eDescription.val(data.files[0].name);
                     eStep2.slideDown();
+                    eStep3.slideDown();
                     view.find(".button.upload").off("click").click(function(){
                         var nickname = eDescription.val();
                         ui._trigger("upload-file", filePath, nickname);
@@ -48,17 +50,6 @@ ui._uploadFile = ui["_upload-file"] = (function(){
                     ui.notify("Error uploading: " + err.responseText, "error");
                 }
             });
-        });
-
-        eDescription.change(function(){
-            if (!eStep3.is(":visible")){
-                eStep3.slideDown();
-            }
-        });
-        eDescription.keydown(function(){
-            if (!eStep3.is(":visible")){
-                eStep3.slideDown();
-            }
         });
 
         view.find(".back.button").click(function(){
