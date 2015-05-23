@@ -46,11 +46,11 @@ var controller = (function() {
     }
 
     function checkForUpdate(callback) {
-        $.getJSON(uiConfig.siad_addr + "/daemon/update/check", callback);
+        $.getJSON(uiConfig.siad_addr + "/daemon/updates/check", callback);
     }
 
     function updateClient(version) {
-        $.get(uiConfig.siad_addr + "/daemon/update/apply", {
+        $.get(uiConfig.siad_addr + "/daemon/updates/apply", {
             version: version
         });
     }
@@ -94,7 +94,7 @@ var controller = (function() {
         });
         ui.addListener("save-host-config", function(hostSettings) {
             console.log(hostSettings);
-            httpApiCall("/host/config", hostSettings);
+            httpApiCall("/host/configure", hostSettings);
         });
         ui.addListener("send-money", function(info) {
             ui.wait();
@@ -127,14 +127,14 @@ var controller = (function() {
                 return
             }
             ui.notify("Downloading " + fileNickname + " to "+savePath+" folder", "download");
-            httpApiCall("/renter/download", {
+            httpApiCall("/renter/files/download", {
                 "nickname": fileNickname,
                 "destination": savePath
             });
         });
         ui.addListener("upload-file", function(filePath, nickName){
             ui.notify("Uploading " + nickName + " to Sia Network", "upload");
-            httpApiCall("/renter/upload", {
+            httpApiCall("/renter/files/upload", {
                 "source": filePath,
                 "nickname": nickName,
             });
@@ -275,7 +275,7 @@ var controller = (function() {
     }
 
     function updateFile(callback) {
-        $.getJSON(uiConfig.siad_addr + "/renter/files", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/renter/files/list", function(response) {
             data.file = {
                 "Files": response || []
             };
