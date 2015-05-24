@@ -45,7 +45,7 @@ function startMainWindow() {
 
     mainWindow.loadUrl('file://' + __dirname + '/site/index.html');
 
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
 
     mainWindow.on('closed', function() {
         mainWindow = null;
