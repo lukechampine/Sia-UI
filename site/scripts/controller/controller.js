@@ -2,13 +2,11 @@ var controller = (function() {
 
     var data = {};
     var createdAddressList = [];
+    var recentAddressList = [];
     var dataListeners = {};
     var uiConfig;
 
     function init() {
-        $.get("http://www.siacoin.com/betamessage.txt", function(content){
-            ui.notify(content);
-        });
         system.getUIConfig(function(config) {
             uiConfig = config;
 
@@ -116,9 +114,17 @@ var controller = (function() {
                     "Address": info.Address,
                     "Balance": 0
                 });
+                recentAddressList = [];
+                recentAddressList.push({
+                    "Address": info.Address,
+                    "Balance": 0
+                });
                 updateWallet(function() {
                     ui.stopWaiting();
                 });
+            });
+            updateWallet(function() {
+                ui.stopWaiting();
             });
         });
         ui.addListener("download-file", function(fileNickname) {
@@ -227,6 +233,23 @@ var controller = (function() {
                     "Transactions": []
                 }]
             };
+
+            createdAddressList = [];
+            var recLen = recentAddressList.length;
+            for (var i = 0; i < recLen; i++) {
+                createdAddressList.push(recentAddressList[i]);
+            }
+            if (recLen > 0) {
+                createdAddressList.push({});
+            }
+            var visLen = response.VisibleAddresses.length;
+            for (var i = 0; i < visLen; i++) {
+                createdAddressList.push({
+                    "Address": response.VisibleAddresses[i],
+                    "Balance": 0
+                });
+            }
+
             updateUI();
             if (callback) callback();
             triggerListener("wallet");
@@ -247,6 +270,10 @@ var controller = (function() {
                 "State": response.State,
                 "Threads": response.Threads,
                 "RunningThreads": response.RunningThreads,
+				"HashRate": response.HashRate,
+				"BlocksPerWeek": response.BlocksPerWeek,
+				"BlocksMined": response.BlocksMined,
+				"OrphansMined": response.OrphansMined,
                 "Address": response.Address,
                 "AccountName": "Main Account",
                 "Balance": balance,

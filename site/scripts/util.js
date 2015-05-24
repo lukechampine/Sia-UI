@@ -25,10 +25,10 @@ var util = (function(){
     }
     function fsiacoin(mcoin, l){
         if (!l) l = 10;
-        var string = parseFloat(siacoin(mcoin).toFixed(l));
+        var string = parseFloat(siacoin(mcoin).toFixed(1));
 
         // Indicate if the user has some value with a last digit of '1'
-        if (mcoin > 0 && string == parseFloat((0).toFixed(l))){
+        if (mcoin > 0 && string == parseFloat((0).toFixed(1))){
             string = parseFloat((0).toFixed(l).substring(0,l-1) + "1");
         }
         return string + " SC";

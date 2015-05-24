@@ -6,32 +6,20 @@ ui._hosting = (function(){
     var hostProperties = [
         {
             "name": "TotalStorage",
-            "unit": "MB",
-            "conversion": 1/1000/1000
-        },{
-            "name": "MinFilesize",
-            "unit": "KB",
-            "conversion": 1/1000
+            "unit": "GB",
+            "conversion": 1/1000000000
         },{
             "name": "MaxFilesize",
-            "unit": "KB",
-            "conversion": 1/1000
-        },{
-            "name": "MinDuration",
-            "unit": "Day",
-            "conversion": 10/60/24
+            "unit": "MB",
+            "conversion": 1/1000000
         },{
             "name": "MaxDuration",
             "unit": "Day",
-            "conversion": 10/60/24
+            "conversion": 1/144
         },{
             "name": "Price",
-            "unit": "SC",
-            "conversion": 1
-        },{
-            "name": "Collateral",
-            "unit": "SC",
-            "conversion": 1
+            "unit": "SC Per GB Per Month",
+            "conversion": 4/1000000000000
         }
     ];
 

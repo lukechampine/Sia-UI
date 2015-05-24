@@ -9,6 +9,8 @@ ui._mining = (function(){
         eIncomeRate = view.find(".income-rate");
         eActiveMiners = view.find(".active-miners");
         eActiveMinerCount = view.find(".miner-control .display .number");
+		eBlocksFound = view.find(".blocks-found");
+		eBPW = view.find(".blocks-per-week")
         eAddMiner = view.find(".add-miner");
         eRemoveMiner = view.find(".remove-miner");
         eToggleMining = view.find(".toggle-mining");
@@ -51,15 +53,19 @@ ui._mining = (function(){
             eMiningStatus.text("Mining Off");
             eMiningStatus.removeClass("enabled");
             eMiningStatus.addClass("disabled");
+			eBPW.text(data.miner.BlocksPerWeek + " Blocks/Week");
             eActiveMiners.text("No Active Threads");
+            eBlocksFound.text(data.miner.BlocksMined + " Blocks Mined");
             eToggleMining.find(".fa-remove").hide();
             eToggleMining.find(".fa-legal").show();
             eToggleMining.find(".text").text("Start Mining");
         }else{
-            eMiningStatus.text("Mining On");
+            eMiningStatus.text((data.miner.HashRate/1000).toFixed(0) + " Khash/s");
             eMiningStatus.removeClass("disabled");
             eMiningStatus.addClass("enabled");
-            eActiveMiners.text(data.miner.RunningThreads + " Active Threads");
+			eBPW.text(data.miner.BlocksPerWeek.toFixed(1) + " Blocks/Week");
+            eActiveMiners.text(data.miner.RunningThreads + " Threads");
+            eBlocksFound.text(data.miner.BlocksMined + " Blocks Mined");
             eToggleMining.find(".fa-remove").show();
             eToggleMining.find(".fa-legal").hide();
             eToggleMining.find(".text").text("Stop Mining");
