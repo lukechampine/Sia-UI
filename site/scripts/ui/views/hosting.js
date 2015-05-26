@@ -1,6 +1,7 @@
 ui._hosting = (function(){
 
     var view, ePropBlueprint, eProps, eControl, eSave, eReset, eAnnounce;
+    var eContracts, eStorage;
 
 
     var hostProperties = [
@@ -45,6 +46,8 @@ ui._hosting = (function(){
         eProps = $();
         eSave = view.find(".control .save");
         eReset = view.find(".control .reset");
+        eContracts = view.find(".contracts");
+        eStorage = view.find(".storage");
 
         addEvents();
     }
@@ -59,7 +62,7 @@ ui._hosting = (function(){
         });
         eReset.click(function(){
             ui._tooltip(this, "Reseting");
-            for (var i = 0;i < editableProps.length;i ++){
+            for (var i = 0; i < editableProps.length; i++){
                 var item = $(eProps[i]);
                 var value = parseFloat(ui._data.host.HostSettings[editableProps[i]]);
                 item.find(".value").text(value * propConversion[i]);
@@ -69,7 +72,7 @@ ui._hosting = (function(){
 
     function parseHostSettings(){
         var newSettings = {};
-        for (var i = 0;i < editableProps.length;i ++){
+        for (var i = 0; i < editableProps.length; i++){
             var item = $(eProps[i]);
             var value = parseFloat(item.find(".value").text());
             newSettings[editableProps[i].toLowerCase()] = value / propConversion[i];
@@ -91,8 +94,24 @@ ui._hosting = (function(){
 
     }
 
+    function update(data){
+        eContracts.html(data.host.HostSettings.NumContracts + " Active Contracts");
+
+        var formatBytes = function(bytes) {
+            if (bytes == 0) return '0 B';
+            var k = 1000;
+            var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+            var i = Math.floor(Math.log(bytes) / Math.log(k));
+            return (bytes / Math.pow(k, i)).toPrecision(i+2) + ' ' + sizes[i];
+        }
+
+        var storage = formatBytes(data.host.HostSettings.TotalStorage - data.host.HostSettings.StorageRemaining);
+        eStorage.html(storage + " in use");
+    }
+
     return {
-        init:init,
-        onViewOpened:onViewOpened
+        "init": init,
+        "onViewOpened": onViewOpened,
+        "update": update,
     };
 })();
