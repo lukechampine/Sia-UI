@@ -281,7 +281,6 @@ var ui = (function(){
 
     // Triggers an event, many ui actions cause triggers
     function _trigger(event){
-        console.log("Event Triggered:",event);
         var callbacks = eventListeners[event] || [];
         for (var i = 0;i < callbacks.length;i++){
             // Convert the arguments to trigger to an array so we can slice off
