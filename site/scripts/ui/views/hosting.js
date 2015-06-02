@@ -97,16 +97,9 @@ ui._hosting = (function(){
     function update(data){
         eContracts.html(data.host.HostSettings.NumContracts + " Active Contracts");
 
-        var formatBytes = function(bytes) {
-            if (bytes == 0) return '0 B';
-            var k = 1000;
-            var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-            var i = Math.floor(Math.log(bytes) / Math.log(k));
-            return (bytes / Math.pow(k, i)).toPrecision(i+2) + ' ' + sizes[i];
-        }
-
-        var storage = formatBytes(data.host.HostSettings.TotalStorage - data.host.HostSettings.StorageRemaining);
-        eStorage.html(storage + " in use");
+        var storage = util.formatBytes(data.host.HostSettings.TotalStorage - data.host.HostSettings.StorageRemaining);
+        var total = util.formatBytes(data.host.HostSettings.TotalStorage);
+        eStorage.html(storage + "/" + total + " in use");
     }
 
     return {
