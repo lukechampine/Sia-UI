@@ -52,6 +52,15 @@ var util = (function(){
         return numberString.slice(0,precision + 1) + " " + si;
     }
 
+    // precision determines the length of number
+    function round(number, flex){
+        if (!flex) flex = .01;
+        if (Math.ceil(number) - number <= flex)
+            return Math.ceil(number);
+        else if (number - Math.floor(number) <= flex)
+            return Math.floor(number);
+    }
+
     // properly controls data size representation
     function formatBytes(bytes) {
         if (bytes == 0) return '0B';
@@ -69,6 +78,7 @@ var util = (function(){
         "fsiacoin": fsiacoin,
         "limitPrecision": limitPrecision,
         "engNotation": engNotation,
+        "round": round,
         "formatBytes": formatBytes
     };
 })();

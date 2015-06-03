@@ -1,7 +1,7 @@
 ui._hosting = (function(){
 
     var view, ePropBlueprint, eProps, eControl, eSave, eReset, eAnnounce;
-    var eContracts, eStorage;
+    var eContracts, eStorage, eRemaining;
 
 
     var hostProperties = [
@@ -48,6 +48,7 @@ ui._hosting = (function(){
         eReset = view.find(".control .reset");
         eContracts = view.find(".contracts");
         eStorage = view.find(".storage");
+        eRemaining = view.find(".remaining");
 
         addEvents();
     }
@@ -65,7 +66,7 @@ ui._hosting = (function(){
             for (var i = 0; i < editableProps.length; i++){
                 var item = $(eProps[i]);
                 var value = parseFloat(ui._data.host.HostSettings[editableProps[i]]);
-                item.find(".value").text(value * propConversion[i]);
+                item.find(".value").text(util.round(value * propConversion[i]));
             }
         });
     }
@@ -89,7 +90,7 @@ ui._hosting = (function(){
             eProps = eProps.add(item);
             item.find(".name").text(editableProps[i] + " ("+ propUnits[i] +")");
             var value = parseFloat(data.host.HostSettings[editableProps[i]]);
-            item.find(".value").text(value * propConversion[i]);
+            item.find(".value").text(util.round(value * propConversion[i]));
         }
 
     }
@@ -97,9 +98,12 @@ ui._hosting = (function(){
     function update(data){
         eContracts.html(data.host.HostSettings.NumContracts + " Active Contracts");
 
-        var storage = util.formatBytes(data.host.HostSettings.TotalStorage - data.host.HostSettings.StorageRemaining);
         var total = util.formatBytes(data.host.HostSettings.TotalStorage);
+        var remaining = util.formatBytes(data.host.HostSettings.StorageRemaining);
+        var storage = util.formatBytes(data.host.HostSettings.TotalStorage - data.host.HostSettings.StorageRemaining);
+
         eStorage.html(storage + "/" + total + " in use");
+        eRemaining.html(remaining + " left")
     }
 
     return {
