@@ -128,7 +128,7 @@ var controller = (function() {
             });
         });
         ui.addListener("download-file", function(fileNickname) {
-            var savePath = ipc.sendSync("save-file-dialog");
+            var savePath = ipc.sendSync("save-file-dialog", fileNickname);
             if (!savePath) {
                 return
             }
