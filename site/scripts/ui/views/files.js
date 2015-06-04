@@ -55,7 +55,7 @@ ui._files = (function(){
     function hashFileList(flist){
         flist = sortFileList(flist);
         return flist.map(function(file){
-            return file.Nickname + file.Available.toString();
+            return file.Nickname + file.Available.toString() + file.UploadProgress;
         }).join("");
     }
 
@@ -87,7 +87,11 @@ ui._files = (function(){
                 var eFile = eFileBlueprint.clone().removeClass("blueprint");
                 var available = fileObject.Available;
                 eFile.find(".name").text(fileNickname);
-                eFile.find(".size").text(" "); //TODO we can't get size ATM
+                if (fileObject.UploadProgress == 0) {
+                    eFile.find(".status").text("Processing...");
+                } else if (fileObject.UploadProgress != 100) {
+                    eFile.find(".status").text(fileObject.UploadProgress.toFixed(2) + "%");
+                }
                 eFile.find(".time").text(blocksRemaining + " Blocks Remaining"); //TODO this unit is bad
                 if (fileObject.Repairing){
                     eFile.find(".graphic i").removeClass("fa-file").addClass("fa-wrench");
