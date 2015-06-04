@@ -4,7 +4,7 @@ var util = (function(){
 
     var pSI = ["", "k", "M", "G", "T"];
     var nSI = ["", "m", "&micro;", "&nano;", "&pico;"];
-    var siaConversionFactor = Math.pow(10,24);
+    var siaConversionFactor = Math.pow(10,27);
 
     // Siacoin to USD
     function USDConvert(balance){
@@ -30,7 +30,7 @@ var util = (function(){
         if (mcoin > 0 && string == parseFloat((0).toFixed(1))){
             string = parseFloat((0).toFixed(l).substring(0,l-1) + "1");
         }
-        return string + " SC";
+        return string + " KSC";
     }
 
     // precision determines the length of number
