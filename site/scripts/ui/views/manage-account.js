@@ -82,10 +82,10 @@ ui._manageAccount = ui["_manage-account"] = (function(){
         }
 
         // TODO this balance should represent the account's balance
-        eBalance.html(util.fsiacoin(account.Balance));
+        eBalance.html(util.fksiacoin(account.Balance));
         eBalance.off("hover");
         eBalance.click(function(){
-            ui._tooltip(this, util.fsiacoin(account.Balance), {left:0,top:30});
+            ui._tooltip(this, util.fksiacoin(account.Balance), {left:0,top:30});
         });
 
         // Populate addresses

@@ -19,7 +19,7 @@ ui._hosting = (function(){
             "conversion": 1/144
         },{
             "name": "Price",
-            "unit": "KSC Per GB Per Month",
+            "unit": "KS Per GB Per Month",
             "conversion": 4/1000000000000000
         }
     ];

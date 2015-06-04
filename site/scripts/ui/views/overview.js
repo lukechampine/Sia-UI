@@ -21,7 +21,7 @@ ui._overview = (function(){
 
     function update(data){
         // Second Header
-        eBalance.html(util.fsiacoin(data.wallet.Balance));
+        eBalance.html(util.fksiacoin(data.wallet.Balance));
 		ePeers.html("Peers: " + data.peer.Peers.length);
         eBlockHeight.html("Block Height: " + data.consensus.Height);
     }

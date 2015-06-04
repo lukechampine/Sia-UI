@@ -22,7 +22,7 @@ var util = (function(){
     }
 
     // base units & precision to siacoin
-    function fsiacoin(mcoin, l){
+    function fksiacoin(mcoin, l){
         if (!l) l = 10;
         var string = parseFloat(siacoin(mcoin).toFixed(1));
 
@@ -30,7 +30,7 @@ var util = (function(){
         if (mcoin > 0 && string == parseFloat((0).toFixed(1))){
             string = parseFloat((0).toFixed(l).substring(0,l-1) + "1");
         }
-        return string + " KSC";
+        return string + " KS";
     }
 
     // precision determines the length of number
@@ -75,7 +75,7 @@ var util = (function(){
         "siaConversionFactor": siaConversionFactor,
         "siacoin": siacoin,
         "baseUnit": baseUnit,
-        "fsiacoin": fsiacoin,
+        "fksiacoin": fksiacoin,
         "limitPrecision": limitPrecision,
         "engNotation": engNotation,
         "round": round,
