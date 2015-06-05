@@ -6,11 +6,6 @@ var util = (function(){
     var nSI = ["", "m", "&micro;", "&nano;", "&pico;"];
     var siaConversionFactor = Math.pow(10,24);
 
-    // Siacoin to USD
-    function USDConvert(balance){
-        return balance * 0.0000000172;
-    }
-
     // base units to siacoin
     function siacoin(mcoin){
         return mcoin / siaConversionFactor;
@@ -71,7 +66,6 @@ var util = (function(){
     }
 
     return {
-        "USDConvert": USDConvert,
         "siaConversionFactor": siaConversionFactor,
         "siacoin": siacoin,
         "baseUnit": baseUnit,
