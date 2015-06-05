@@ -1,7 +1,7 @@
 ui._hosting = (function(){
 
     var view, ePropBlueprint, eProps, eControl, eSave, eReset, eAnnounce;
-    var eContracts, eStorage, eRemaining, eEarnings, ePotentialProfit;
+    var eContracts, eStorage, eRemaining, eProfit, ePotentialProfit;
 
 
     var hostProperties = [
@@ -49,7 +49,7 @@ ui._hosting = (function(){
         eContracts = view.find(".contracts");
         eStorage = view.find(".storage");
         eRemaining = view.find(".remaining");
-        eEarnings = view.find(".earnings");
+        eProfit = view.find(".profit");
         ePotentialProfit = view.find(".potentialprofit");
 
         addEvents();
@@ -106,7 +106,7 @@ ui._hosting = (function(){
         eContracts.html(data.host.HostInfo.NumContracts + " Active Contracts");
         eStorage.html(storage + "/" + total + " in use");
         eRemaining.html(remaining + " left")
-        eEarnings.html(profit + " earned");
+        eProfit.html(profit + " earned");
         ePotentialProfit.html(potentialProfit + " to be earned");
     }
 
