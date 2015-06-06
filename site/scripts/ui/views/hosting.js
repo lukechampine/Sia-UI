@@ -8,19 +8,19 @@ ui._hosting = (function(){
         {
             "name": "TotalStorage",
             "unit": "GB",
-            "conversion": 1/1000000000
+            "conversion": 1/1e9
         },{
             "name": "MaxFilesize",
             "unit": "MB",
-            "conversion": 1/1000000
+            "conversion": 1/1e6
         },{
             "name": "MaxDuration",
             "unit": "Day",
             "conversion": 1/144
         },{
             "name": "Price",
-            "unit": "SC Per GB Per Month",
-            "conversion": 4/1000000000000
+            "unit": "KS Per GB Per Month",
+            "conversion": 4/1e15
         }
     ];
 

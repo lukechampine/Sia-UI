@@ -72,11 +72,11 @@ ui._mining = (function(){
         }
 
         eActiveMinerCount.text(data.miner.RunningThreads);
-        //eIncomeRate.html(util.fsiacoin(data.miner.IncomeRate, 20) + "/s"); RELEASE HOTFIX 5.6.15
+        //eIncomeRate.html(util.fksiacoin(data.miner.IncomeRate, 20) + "/s"); RELEASE HOTFIX 5.6.15
 
         eAccountName.text(data.miner.AccountName);
 
-        eBalance.text(util.fsiacoin(data.miner.Balance));
+        eBalance.text(util.fksiacoin(data.miner.Balance));
 
     }
 

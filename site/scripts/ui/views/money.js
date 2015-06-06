@@ -62,7 +62,7 @@ ui._money = (function(){
             var item = blueprint.clone().removeClass("blueprint");
             blueprint.parent().append(item);
             item.find(".name").text(account.Name);
-            item.find(".money").text(util.fsiacoin(account.Balance));
+            item.find(".money").text(util.fksiacoin(account.Balance));
             accountElements.push(item[0]);
         });
         eItems = $(accountElements);
