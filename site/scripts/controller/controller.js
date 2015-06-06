@@ -90,9 +90,9 @@ var controller = (function() {
         ui.addListener("stop-mining", function() {
             httpApiCall("/miner/stop");
         });
-        ui.addListener("save-host-config", function(hostSettings) {
-            console.log(hostSettings);
-            httpApiCall("/host/configure", hostSettings);
+        ui.addListener("save-host-config", function(hostInfo) {
+            console.log(hostInfo);
+            httpApiCall("/host/configure", hostInfo);
         });
         ui.addListener("send-money", function(info) {
             ui.wait();
@@ -221,13 +221,11 @@ var controller = (function() {
             data.wallet = {
                 "Balance": response.Balance,
                 "FullBalance": response.FullBalance,
-                "USDBalance": util.USDConvert(response.Balance),
                 "NumAddresses": response.NumAddresses,
                 "DefaultAccount": "Main Account",
                 "Accounts": [{
                     "Name": "Default",
                     "Balance": response.Balance,
-                    "USDBalance": util.USDConvert(response.Balance),
                     "NumAddresses": response.NumAddresses,
                     "Addresses": createdAddressList,
                     "Transactions": []
@@ -277,7 +275,6 @@ var controller = (function() {
                 "Address": response.Address,
                 "AccountName": "Main Account",
                 "Balance": balance,
-                "USDBalance": util.USDConvert(balance),
                 "IncomeRate": runningIncomeRateAverage
             };
             lastBalance = balance;
@@ -291,7 +288,7 @@ var controller = (function() {
     function updateHost(callback) {
         $.getJSON(uiConfig.siad_addr + "/host/status", function(response) {
             data.host = {
-                "HostSettings": response
+                "HostInfo": response
             };
             updateUI();
             if (callback) callback();

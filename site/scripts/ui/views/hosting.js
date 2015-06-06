@@ -1,7 +1,7 @@
 ui._hosting = (function(){
 
     var view, ePropBlueprint, eProps, eControl, eSave, eReset, eAnnounce;
-    var eContracts, eStorage, eRemaining;
+    var eContracts, eStorage, eRemaining, eProfit, ePotentialProfit;
 
 
     var hostProperties = [
@@ -34,7 +34,7 @@ ui._hosting = (function(){
     var propConversion = hostProperties.map(function(obj){
         return obj["conversion"];
     });
-    var lastHostSettings;
+    var lastHostInfo;
 
     function init(){
 
@@ -49,6 +49,8 @@ ui._hosting = (function(){
         eContracts = view.find(".contracts");
         eStorage = view.find(".storage");
         eRemaining = view.find(".remaining");
+        eProfit = view.find(".profit");
+        ePotentialProfit = view.find(".potentialprofit");
 
         addEvents();
     }
@@ -59,26 +61,26 @@ ui._hosting = (function(){
         });
         eSave.click(function(){
             ui._tooltip(this, "Saving");
-            ui._trigger("save-host-config", parseHostSettings());
+            ui._trigger("save-host-config", parseHostInfo());
         });
         eReset.click(function(){
             ui._tooltip(this, "Reseting");
             for (var i = 0; i < editableProps.length; i++){
                 var item = $(eProps[i]);
-                var value = parseFloat(ui._data.host.HostSettings[editableProps[i]]);
+                var value = parseFloat(ui._data.host.HostInfo[editableProps[i]]);
                 item.find(".value").text(util.round(value * propConversion[i]));
             }
         });
     }
 
-    function parseHostSettings(){
-        var newSettings = {};
+    function parseHostInfo(){
+        var newInfo = {};
         for (var i = 0; i < editableProps.length; i++){
             var item = $(eProps[i]);
             var value = parseFloat(item.find(".value").text());
-            newSettings[editableProps[i].toLowerCase()] = value / propConversion[i];
+            newInfo[editableProps[i].toLowerCase()] = value / propConversion[i];
         }
-        return newSettings;
+        return newInfo;
     }
 
     function onViewOpened(data){
@@ -89,21 +91,23 @@ ui._hosting = (function(){
             ePropBlueprint.parent().append(item);
             eProps = eProps.add(item);
             item.find(".name").text(editableProps[i] + " ("+ propUnits[i] +")");
-            var value = parseFloat(data.host.HostSettings[editableProps[i]]);
+            var value = parseFloat(data.host.HostInfo[editableProps[i]]);
             item.find(".value").text(util.round(value * propConversion[i]));
         }
-
     }
 
     function update(data){
-        eContracts.html(data.host.HostSettings.NumContracts + " Active Contracts");
+        var total = util.formatBytes(data.host.HostInfo.TotalStorage);
+        var remaining = util.formatBytes(data.host.HostInfo.StorageRemaining);
+        var storage = util.formatBytes(data.host.HostInfo.TotalStorage - data.host.HostInfo.StorageRemaining);
+        var profit = data.host.HostInfo.Profit;
+        var potentialProfit = data.host.HostInfo.PotentialProfit;
 
-        var total = util.formatBytes(data.host.HostSettings.TotalStorage);
-        var remaining = util.formatBytes(data.host.HostSettings.StorageRemaining);
-        var storage = util.formatBytes(data.host.HostSettings.TotalStorage - data.host.HostSettings.StorageRemaining);
-
+        eContracts.html(data.host.HostInfo.NumContracts + " Active Contracts");
         eStorage.html(storage + "/" + total + " in use");
         eRemaining.html(remaining + " left")
+        eProfit.html(profit + " earned");
+        ePotentialProfit.html(potentialProfit + " to be earned");
     }
 
     return {
