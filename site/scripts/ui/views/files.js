@@ -93,7 +93,7 @@ ui._files = (function(){
                 eFile.find(".name").text(shortName);
                 if (fileObject.UploadProgress == 0) {
                     eFile.find(".time").text("Processing...");
-                } else if (fileObject.UploadProgress != 100) {
+                } else if (fileObject.UploadProgress < 100) {
                     eFile.find(".time").text(fileObject.UploadProgress.toFixed(2) + "%");
                 } else {
                 	eFile.find(".time").text(blocksRemaining + " Blocks Remaining"); //TODO this unit is bad
