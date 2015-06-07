@@ -86,13 +86,18 @@ ui._files = (function(){
                 var blocksRemaining = fileObject.TimeRemaining;
                 var eFile = eFileBlueprint.clone().removeClass("blueprint");
                 var available = fileObject.Available;
-                eFile.find(".name").text(fileNickname);
+				var shortName = fileNickname;
+				if (fileNickname.length > 30) {
+					shortName = fileNickname.substr(0,27) + "...";
+				}
+                eFile.find(".name").text(shortName);
                 if (fileObject.UploadProgress == 0) {
-                    eFile.find(".status").text("Processing...");
+                    eFile.find(".time").text("Processing...");
                 } else if (fileObject.UploadProgress != 100) {
-                    eFile.find(".status").text(fileObject.UploadProgress.toFixed(2) + "%");
-                }
-                eFile.find(".time").text(blocksRemaining + " Blocks Remaining"); //TODO this unit is bad
+                    eFile.find(".time").text(fileObject.UploadProgress.toFixed(2) + "%");
+                } else {
+                	eFile.find(".time").text(blocksRemaining + " Blocks Remaining"); //TODO this unit is bad
+				}
                 if (fileObject.Repairing){
                     eFile.find(".graphic i").removeClass("fa-file").addClass("fa-wrench");
                 }else{
