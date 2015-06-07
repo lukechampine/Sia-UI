@@ -106,8 +106,8 @@ ui._hosting = (function(){
         eContracts.html(data.host.HostInfo.NumContracts + " Active Contracts");
         eStorage.html(storage + "/" + total + " in use");
         eRemaining.html(remaining + " left")
-        eProfit.html((1000 * util.siacoin(profit)).toFixed(3) + " S earned");
-        ePotentialProfit.html((1000 * util.siacoin(potentialProfit)).toFixed(5) + " S to be earned");
+        eProfit.html((util.siacoin(profit)).toFixed(3) + " KS earned");
+        ePotentialProfit.html((util.siacoin(potentialProfit)).toFixed(5) + " KS to be earned");
     }
 
     return {
