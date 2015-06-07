@@ -4,6 +4,7 @@ ui._files = (function(){
 
     function init(){
         view = $("#files");
+		eRenterPrice = view.find(".renter-price");
         eUploadFile = view.find(".upload-public");
         eFileBlueprint = view.find(".file.blueprint");
         eSearchBox = view.find(".search");
@@ -38,12 +39,14 @@ ui._files = (function(){
     function update(data){
         if (data.file.Files && fileListHasImportantChanges(data.file.Files, lastLoadedFiles)){
             updateFileList(data.file.Files);
+			updateFilePrice(data.filePrice);
         }
     }
 
     function onViewOpened(data){
         if (data.file.Files){
             updateFileList(data.file.Files);
+			updateFilePrice(data.filePrice);
         }
         eSearch[0].innerHTML = "";
     }
@@ -86,13 +89,18 @@ ui._files = (function(){
                 var blocksRemaining = fileObject.TimeRemaining;
                 var eFile = eFileBlueprint.clone().removeClass("blueprint");
                 var available = fileObject.Available;
-                eFile.find(".name").text(fileNickname);
+				var shortName = fileNickname;
+				if (fileNickname.length > 30) {
+					shortName = fileNickname.substr(0,27) + "...";
+				}
+                eFile.find(".name").text(shortName);
                 if (fileObject.UploadProgress == 0) {
-                    eFile.find(".status").text("Processing...");
-                } else if (fileObject.UploadProgress != 100) {
-                    eFile.find(".status").text(fileObject.UploadProgress.toFixed(2) + "%");
-                }
-                eFile.find(".time").text(blocksRemaining + " Blocks Remaining"); //TODO this unit is bad
+                    eFile.find(".time").text("Processing...");
+                } else if (fileObject.UploadProgress < 100) {
+                    eFile.find(".time").text(fileObject.UploadProgress.toFixed(2) + "%");
+                } else {
+                	eFile.find(".time").text(blocksRemaining + " Blocks Remaining"); //TODO this unit is bad
+				}
                 if (fileObject.Repairing){
                     eFile.find(".graphic i").removeClass("fa-file").addClass("fa-wrench");
                 }else{
@@ -120,6 +128,10 @@ ui._files = (function(){
         });
         eFiles = $(newFileElements);
     }
+
+	function updateFilePrice(filePrice){
+		eRenterPrice.text("Estimated Price Per GB: " + util.siacoin(filePrice).toFixed(5) + " KS");
+	}
 
     return {
         init:init,
