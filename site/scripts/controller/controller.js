@@ -311,6 +311,17 @@ var controller = (function() {
         });
     }
 
+    function updateRenter(callback) {
+        $.getJSON(uiConfig.siad_addr + "/renter/status", function(response) {
+            data.filePrice = response.Price;
+            updateUI();
+            if (callback) callback();
+            triggerListener("file");
+        }).error(function() {
+            console.log(arguments);
+        });
+    }
+
     function updateConsensus(callback) {
         $.getJSON(uiConfig.siad_addr + "/consensus/status", function(response) {
             data.consensus = {
@@ -354,6 +365,7 @@ var controller = (function() {
         updateMiner();
         updateHost();
         updateFile();
+        updateRenter();
         updateConsensus();
         updatePeer();
         updateQueue();
