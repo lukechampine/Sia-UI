@@ -4,7 +4,7 @@ ui._transferFunds = ui["_transfer-funds"] = (function(){
         accountBalance, accountName, transferFromType, transferToType, eSummaryAmount,
         eSummaryFrom, eSummaryTo, eSendMoney, eBack;
 
-    var numberPrecision = 18;
+    var numberPrecision = 9;
 
     function init(){
 
@@ -29,7 +29,7 @@ ui._transferFunds = ui["_transfer-funds"] = (function(){
 
             fAccountFinalBalance.setValue(util.limitPrecision(finalBalance,numberPrecision));
 
-            eSummaryAmount.text(val + " SC");
+            eSummaryAmount.text(val + " KS");
 
         });
 
@@ -39,7 +39,7 @@ ui._transferFunds = ui["_transfer-funds"] = (function(){
 
             fAccountTransfer.setValue(util.limitPrecision(transferAmount,numberPrecision))
 
-            eSummaryAmount.text(transferAmount + " SC");
+            eSummaryAmount.text(transferAmount + " KS");
 
         });
 
