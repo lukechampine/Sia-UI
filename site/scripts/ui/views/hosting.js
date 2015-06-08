@@ -103,11 +103,11 @@ ui._hosting = (function(){
         var profit = data.host.HostInfo.Profit;
         var potentialProfit = data.host.HostInfo.PotentialProfit;
 
-        eContracts.html(data.host.HostInfo.NumContracts + " Active Contracts");
+        eContracts.html(data.host.HostInfo.NumContracts + " Contracts");
         eStorage.html(storage + "/" + total + " in use");
         eRemaining.html(remaining + " left")
-        eProfit.html((util.siacoin(profit)).toFixed(3) + " KS earned");
-        ePotentialProfit.html((util.siacoin(potentialProfit)).toFixed(5) + " KS to be earned");
+        eProfit.html((util.siacoin(profit)).toFixed(4) + " KS earned");
+        ePotentialProfit.html((util.siacoin(potentialProfit)).toFixed(4) + " KS to be earned");
     }
 
     return {
