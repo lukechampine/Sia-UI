@@ -19,8 +19,8 @@ ui._hosting = (function(){
             "conversion": 1/144
         },{
             "name": "Price",
-            "unit": "KS Per GB Per Month",
-            "conversion": 4/1e15
+            "unit": "SC Per GB Per Month",
+            "conversion": 4/1e12
         }
     ];
 
@@ -108,6 +108,8 @@ ui._hosting = (function(){
         eRemaining.html(remaining + " left")
         eProfit.html((util.siacoin(profit)).toFixed(4) + " KS earned");
         ePotentialProfit.html((util.siacoin(potentialProfit)).toFixed(4) + " KS to be earned");
+
+		document.getElementById("hmessage").innerHTML = "Estimated Competitive Price: " + 1000 * util.siacoin(data.host.HostInfo.Competition).toFixed(3) + " SC / GB / Month";
     }
 
     return {
