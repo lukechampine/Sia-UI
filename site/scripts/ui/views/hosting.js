@@ -2,6 +2,7 @@ ui._hosting = (function(){
 
     var view, ePropBlueprint, eProps, eControl, eSave, eReset, eAnnounce;
     var eContracts, eStorage, eRemaining, eProfit, ePotentialProfit;
+	var updateTime = 0;
 
 
     var hostProperties = [
@@ -109,7 +110,11 @@ ui._hosting = (function(){
         eProfit.html((util.siacoin(profit)).toFixed(4) + " KS earned");
         ePotentialProfit.html((util.siacoin(potentialProfit)).toFixed(4) + " KS to be earned");
 
-        document.getElementById("hmessage").innerHTML = "Estimated Competitive Price: " + 1000 * util.siacoin(data.host.HostInfo.Competition).toFixed(3) + " SC / GB / Month";
+		var d = new Date();
+		if (updateTime < d.getTime() - 15000) {
+        	document.getElementById("hmessage").innerHTML = "Estimated Competitive Price: " + 1000 * util.siacoin(data.host.HostInfo.Competition).toFixed(3) + " SC / GB / Month";
+			updateTime = d.getTime();
+		}
     }
 
     return {
