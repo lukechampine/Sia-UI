@@ -2,6 +2,7 @@ ui._hosting = (function(){
 
     var view, ePropBlueprint, eProps, eControl, eSave, eReset, eAnnounce;
     var eContracts, eStorage, eRemaining, eProfit, ePotentialProfit;
+	var updateTime = 0;
 
 
     var hostProperties = [
@@ -19,8 +20,8 @@ ui._hosting = (function(){
             "conversion": 1/144
         },{
             "name": "Price",
-            "unit": "KS Per GB Per Month",
-            "conversion": 4/1e15
+            "unit": "SC Per GB Per Month",
+            "conversion": 4/1e12
         }
     ];
 
@@ -103,11 +104,17 @@ ui._hosting = (function(){
         var profit = data.host.HostInfo.Profit;
         var potentialProfit = data.host.HostInfo.PotentialProfit;
 
-        eContracts.html(data.host.HostInfo.NumContracts + " Active Contracts");
+        eContracts.html(data.host.HostInfo.NumContracts + " Contracts");
         eStorage.html(storage + "/" + total + " in use");
         eRemaining.html(remaining + " left")
-        eProfit.html((util.siacoin(profit)).toFixed(3) + " KS earned");
-        ePotentialProfit.html((util.siacoin(potentialProfit)).toFixed(5) + " KS to be earned");
+        eProfit.html((util.siacoin(profit)).toFixed(4) + " KS earned");
+        ePotentialProfit.html((util.siacoin(potentialProfit)).toFixed(4) + " KS to be earned");
+
+		var d = new Date();
+		if (updateTime < d.getTime() - 15000) {
+        	document.getElementById("hmessage").innerHTML = "Estimated Competitive Price: " + 1000 * util.siacoin(data.host.HostInfo.Competition).toFixed(3) + " SC / GB / Month";
+			updateTime = d.getTime();
+		}
     }
 
     return {

@@ -5,6 +5,7 @@ ui._files = (function(){
     function init(){
         view = $("#files");
 		eRenterPrice = view.find(".renter-price");
+		eRenterHostCount = view.find(".renter-host-count");
         eUploadFile = view.find(".upload-public");
         eFileBlueprint = view.find(".file.blueprint");
         eSearchBox = view.find(".search");
@@ -39,14 +40,16 @@ ui._files = (function(){
     function update(data){
         if (data.file.Files && fileListHasImportantChanges(data.file.Files, lastLoadedFiles)){
             updateFileList(data.file.Files);
-			updateFilePrice(data.filePrice);
+            updateFilePrice(data.filePrice);
+            updateHostCount(data.hostCount);
         }
     }
 
     function onViewOpened(data){
         if (data.file.Files){
             updateFileList(data.file.Files);
-			updateFilePrice(data.filePrice);
+            updateFilePrice(data.filePrice);
+            updateHostCount(data.hostCount);
         }
         eSearch[0].innerHTML = "";
     }
@@ -129,9 +132,12 @@ ui._files = (function(){
         eFiles = $(newFileElements);
     }
 
-	function updateFilePrice(filePrice){
-		eRenterPrice.text("Estimated Price Per GB: " + util.siacoin(filePrice).toFixed(5) + " KS");
-	}
+    function updateFilePrice(filePrice){
+        eRenterPrice.text("Estimated Price Per GB: " + util.siacoin(filePrice).toFixed(5) + " KS");
+    }
+    function updateHostCount(hostCount){
+        eRenterHostCount.text("Known Hosts: " + hostCount);
+    }
 
     return {
         init:init,
