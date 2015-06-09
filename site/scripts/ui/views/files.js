@@ -40,14 +40,14 @@ ui._files = (function(){
     function update(data){
         if (data.file.Files && fileListHasImportantChanges(data.file.Files, lastLoadedFiles)){
             updateFileList(data.file.Files);
-			updateFilePrice(data.filePrice, data.hostCount);
+            updateFilePrice(data.filePrice, data.hostCount);
         }
     }
 
     function onViewOpened(data){
         if (data.file.Files){
             updateFileList(data.file.Files);
-			updateFilePrice(data.filePrice, data.hostCount);
+            updateFilePrice(data.filePrice, data.hostCount);
         }
         eSearch[0].innerHTML = "";
     }
@@ -130,10 +130,10 @@ ui._files = (function(){
         eFiles = $(newFileElements);
     }
 
-	function updateFilePrice(filePrice, hostCount){
-		eRenterPrice.text("Estimated Price Per GB: " + util.siacoin(filePrice).toFixed(5) + " KS");
-		eRenterHostCount.text("Known Hosts: " + hostCount);
-	}
+    function updateFilePrice(filePrice, hostCount){
+        eRenterPrice.text("Estimated Price Per GB: " + util.siacoin(filePrice).toFixed(5) + " KS");
+        eRenterHostCount.text("Known Hosts: " + hostCount);
+    }
 
     return {
         init:init,

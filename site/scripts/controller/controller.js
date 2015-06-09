@@ -314,7 +314,7 @@ var controller = (function() {
     function updateRenter(callback) {
         $.getJSON(uiConfig.siad_addr + "/renter/status", function(response) {
             data.filePrice = response.Price;
-			data.hostCount = response.KnownHosts;
+            data.hostCount = response.KnownHosts;
             updateUI();
             if (callback) callback();
             triggerListener("file");
