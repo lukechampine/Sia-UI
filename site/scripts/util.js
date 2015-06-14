@@ -62,7 +62,7 @@ var util = (function(){
         var k = 1000;
         var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
         var i = Math.floor((Math.log(bytes) + 1) / Math.log(k));
-        return (bytes / Math.pow(k, i)).toPrecision(3) + sizes[i];
+        return (bytes / Math.pow(k, i)).toPrecision(3) + " " + sizes[i];
     }
 
     return {
