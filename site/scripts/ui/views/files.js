@@ -75,7 +75,6 @@ ui._files = (function(){
         });
     }
 
-    var th = 0;
     function fileListHasImportantChanges(a,b){
         // we only care about availability and names
         return hashFileList(a) != hashFileList(b);
@@ -97,6 +96,7 @@ ui._files = (function(){
 					shortName = fileNickname.substr(0,27) + "...";
 				}
                 eFile.find(".name").text(shortName);
+                eFile.find(".size").text(util.formatBytes(fileObject.Filesize));
                 if (fileObject.UploadProgress == 0) {
                     eFile.find(".time").text("Processing...");
                 } else if (fileObject.UploadProgress < 100) {
