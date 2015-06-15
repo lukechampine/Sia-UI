@@ -5,7 +5,7 @@ module.exports = function(grunt){
         pkg: grunt.file.readJSON('package.json'),
 
         'download-atom-shell': {
-            version: '0.20.3',
+            version: '0.28.1',
             outputDir: 'atom-shell'
         },
 
@@ -39,9 +39,9 @@ module.exports = function(grunt){
         var done = this.async();
         var cp = require("child_process");
         if (process.platform == "darwin"){
-            atom_path = path.join("atom-shell","Atom.app","Contents","MacOS","Atom");
+            atom_path = path.join("atom-shell","Electron.app","Contents","MacOS","Electron");
         }else{
-            atom_path = path.join("atom-shell","atom");
+            atom_path = path.join("atom-shell","electron");
         }
         var atomProcess = cp.spawn(atom_path, ["."]);
         atomProcess.stdout.on("data", function(output){
