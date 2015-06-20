@@ -14,7 +14,7 @@
 var ui = (function(){
 
     var currentView = "overview";
-    var viewNames = ["overview", "money", "manage-account", "transfer-funds", "upload-file", "files", "mining", "hosting", "network","about", "add-ascii"];
+    var viewNames = ["overview", "money", "manage-account", "transfer-funds", "upload-file", "files", "hosting", "network","about", "add-ascii"];
     var transitionTypes = {
         "money->manage-account": "slideleft",
         "manage-account->money": "slideright",

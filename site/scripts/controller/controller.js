@@ -68,28 +68,6 @@ var controller = (function() {
 	}
 
 	function addListeners() {
-		ui.addListener("add-miner", function() {
-			httpApiCall("/miner/start", {
-				"threads": data.miner.Threads + 1
-			});
-		});
-		ui.addListener("remove-miner", function() {
-			httpApiCall("/miner/start", {
-				"threads": data.miner.Threads - 1 < 0 ? 0 : data.miner.Threads - 1
-			});
-		});
-		ui.addListener("toggle-mining", function() {
-			if (data.miner.State == "Off") {
-				httpApiCall("/miner/start", {
-					"threads": data.miner.Threads
-				});
-			} else {
-				httpApiCall("/miner/stop");
-			}
-		});
-		ui.addListener("stop-mining", function() {
-			httpApiCall("/miner/stop");
-		});
 		ui.addListener("save-host-config", function(hostInfo) {
 			console.log(hostInfo);
 			httpApiCall("/host/configure", hostInfo);
@@ -254,37 +232,6 @@ var controller = (function() {
 		});
 	}
 
-	function updateMiner(callback) {
-		$.getJSON(uiConfig.siad_addr + "/miner/status", function(response) {
-			var timeDifference = (Date.now() - lastUpdateTime) * 1000;
-			var balance = data.wallet ? data.wallet.Balance : 0;
-			var balanceDifference = balance - lastBalance;
-			var incomeRate = balanceDifference / timeDifference;
-			runningIncomeRateAverage = (runningIncomeRateAverage * 1999 + incomeRate) / 2000;
-			if (response.State == "Off") {
-				runningIncomeRateAverage = 0;
-			}
-			data.miner = {
-				// "State": response.State,
-				// "Threads": response.Threads,
-				// "RunningThreads": response.RunningThreads,
-				"HashRate": response.CPUHashRate,
-				// "BlocksPerWeek": response.BlocksPerWeek,
-				"BlocksMined": response.BlocksMined,
-				"OrphansMined": response.StaleBlocksMined,
-				// "Address": response.Address,
-				// "AccountName": "Main Account",
-				// "Balance": balance,
-				// "IncomeRate": runningIncomeRateAverage
-			};
-			lastBalance = balance;
-			lastUpdateTime = Date.now();
-			updateUI();
-			if (callback) callback();
-			triggerListener("miner");
-		});
-	}
-
 	function updateHost(callback) {
 		$.getJSON(uiConfig.siad_addr + "/host/status", function(response) {
 			data.host = {
@@ -363,7 +310,6 @@ var controller = (function() {
 
 	function update() {
 		updateWallet();
-		updateMiner();
 		updateHost();
 		updateFile();
 		updateRenter();
@@ -373,7 +319,7 @@ var controller = (function() {
 	}
 
 	function updateUI() {
-		if (data.wallet && data.miner && data.host && data.file && data.consensus) {
+		if (data.wallet && data.host && data.file && data.consensus) {
 			ui.update(data);
 		}
 	}
