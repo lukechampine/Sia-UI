@@ -44,6 +44,7 @@ ui._mining = (function(){
     }
 
     function update(data){
+		/*
         var minerOn = data.miner.State == "Off" ? false : true;
         if (data.miner.Threads < 1){
             minerOn = false;
@@ -77,7 +78,7 @@ ui._mining = (function(){
         eAccountName.text(data.miner.AccountName);
 
         eBalance.text(util.fksiacoin(data.miner.Balance));
-
+		*/
     }
 
     return {
