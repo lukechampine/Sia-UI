@@ -24,11 +24,6 @@ var controller = (function() {
 			update();
 		}, 250);
 
-		// set siad version
-		getVersion(function(version) {
-			data.Version = version;
-		});
-
 		// Wait two seconds then check for a Sia client update
 		setTimeout(function() {
 			promptUserIfUpdateAvailable();
@@ -316,6 +311,12 @@ var controller = (function() {
 		});
 	}
 
+	function updateVersion() {
+		getVersion(function(version) {
+			data.Version = version;
+		});
+	}
+
 	function update() {
 		updateWallet();
 		updateHost();
@@ -324,6 +325,7 @@ var controller = (function() {
 		updateConsensus();
 		updatePeer();
 		updateQueue();
+		updateVersion();
 	}
 
 	function updateUI() {
