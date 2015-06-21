@@ -24,6 +24,11 @@ var controller = (function() {
 			update();
 		}, 250);
 
+		// set siad version
+		getVersion(function(version) {
+			data.Version = version;
+		});
+
 		// Wait two seconds then check for a Sia client update
 		setTimeout(function() {
 			promptUserIfUpdateAvailable();
@@ -32,7 +37,6 @@ var controller = (function() {
 
 	function promptUserIfUpdateAvailable() {
 		checkForUpdate(function(update) {
-			data.Version = update.Version;
 			if (update.Available) {
 				ui.notify("New Sia Client Available: Click to update to " + update.Version + "!", "update", function() {
 					updateClient(update.Version);
@@ -41,6 +45,10 @@ var controller = (function() {
 				ui.notify("Sia client up to date!", "success");
 			}
 		});
+	}
+
+	function getVersion(callback) {
+		$.getJSON(uiConfig.siad_addr + "/daemon/version", callback);
 	}
 
 	function checkForUpdate(callback) {
