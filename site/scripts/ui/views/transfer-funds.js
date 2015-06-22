@@ -55,7 +55,7 @@ ui._transferFunds = ui["_transfer-funds"] = (function(){
             ui._trigger("send-money", {
                 "from": {
                     "type": transferFromType,
-                    "amount": util.baseUnit(parseFloat(fAccountTransfer.getValue()))
+                    "amount": util.bigInt(util.baseUnit(parseFloat(fAccountTransfer.getValue())))
                 },
                 "to": {
                     "type": transferToType,
