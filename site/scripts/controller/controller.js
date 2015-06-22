@@ -53,6 +53,8 @@ var controller = (function() {
 	function updateClient(version) {
 		$.get(uiConfig.siad_addr + "/daemon/updates/apply", {
 			version: version
+		}, function(data) {
+			ui.notify("Update successful! Restart your client now.", "success");
 		});
 	}
 
