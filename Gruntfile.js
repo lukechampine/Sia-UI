@@ -5,7 +5,7 @@ module.exports = function(grunt){
         pkg: grunt.file.readJSON('package.json'),
 
         'download-atom-shell': {
-            version: '0.20.3',
+            version: '0.28.3',
             outputDir: 'atom-shell'
         },
 
